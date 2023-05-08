@@ -34,4 +34,16 @@ class FileService
         ->setUsername($file->getUser()->getUsername())
         ->setUploadDate($file->getUploadDate()->getTimestamp());
     }
+
+    private function getFile(int $id): FileListItem
+    {
+        $file = $this->fileRepository->find($id);
+        return (new FileListItem())
+            ->setId($file->getId())
+            ->setName($file->getName())
+            ->setPath($file->getPath())
+            ->setSize($file->getSize())
+            ->setUsername($file->getUser()->getUsername())
+            ->setUploadDate($file->getUploadDate()->getTimestamp());
+    }
 }

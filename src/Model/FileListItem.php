@@ -10,7 +10,7 @@ class FileListItem
 
     private string $path;
 
-    private int $size;
+    private float $size;
 
     private int $uploadDate;
 
@@ -40,7 +40,7 @@ class FileListItem
         return $this->path;
     }
 
-    public function getSize(): int
+    public function getSize(): float
     {
         return $this->size;
     }
@@ -71,7 +71,7 @@ class FileListItem
         return $this;
     }
 
-    public function setSize(int $size): self
+    public function setSize(float $size): self
     {
         $this->size = $size;
 
