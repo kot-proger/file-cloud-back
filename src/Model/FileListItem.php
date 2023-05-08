@@ -14,6 +14,8 @@ class FileListItem
 
     private int $uploadDate;
 
+    private string $username;
+
     //    public function __construct(int $id, string $name, string $path, int $size, int $uploadDate)
     //    {
     //        $this->id = $id;
@@ -79,6 +81,18 @@ class FileListItem
     public function setUploadDate(int $uploadDate): self
     {
         $this->uploadDate = $uploadDate;
+
+        return $this;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }

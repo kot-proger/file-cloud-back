@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\FileRepository;
-use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FileRepository::class)]
@@ -20,13 +19,22 @@ class File
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $path = null;
 
-    #[ORM\Column(type: 'integer')]
-    private ?int $size = null;
+    #[ORM\Column(type: 'decimal')]
+    private ?float $size = null;
 
-    #[ORM\Column(type: 'date')]
-    private DateTimeInterface $uploadDate;
+    #[ORM\Column(type: 'date_immutable')]
+    private \DateTimeInterface $uploadDate;
 
-    //    #[ORM\ManyToMany(targetEntity: User)]
+    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    private User $user;
+
+    #[ORM\PrePersist]
+    public function setCreatedValue(): void
+    {
+        $this->uploadDate = new \DateTimeImmutable();
+
+    }
 
     public function getId(): ?int
     {
@@ -69,14 +77,26 @@ class File
         return $this;
     }
 
-    public function getUploadDate(): ?DateTimeInterface
+    public function getUploadDate(): ?\DateTimeInterface
     {
         return $this->uploadDate;
     }
 
-    public function setUploadDate(?DateTimeInterface $uploadDate): self
+    public function setUploadDate(?\DateTimeInterface $uploadDate): self
     {
         $this->uploadDate = $uploadDate;
+
+        return $this;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -9,7 +9,7 @@ use App\Repository\FileRepository;
 
 class FileService
 {
-    public function __construct(private readonly FileRepository $fileRepository)
+    public function __construct(private FileRepository $fileRepository)
     {
     }
 
@@ -31,6 +31,7 @@ class FileService
         ->setName($file->getName())
         ->setPath($file->getPath())
         ->setSize($file->getSize())
+        ->setUsername($file->getUser()->getUsername())
         ->setUploadDate($file->getUploadDate()->getTimestamp());
     }
 }
