@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\File;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -10,32 +11,32 @@ class FileFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $file = new File();
-        $file->setName('audio.mp3');
-        $file->setDate('03.04.2023');
-        $file->setPath('/home/audio');
-        $file->setSize(25);
+        $file = (new File())
+        ->setName('audio.mp3')
+        ->setUploadDate(new DateTime('2023-04-01'))
+        ->setPath('/home/audio')
+        ->setSize(25);
         $manager->persist($file);
 
-        $file = new File();
-        $file->setName('video.mp4');
-        $file->setDate('03.04.2023');
-        $file->setPath('/home/video');
-        $file->setSize(75);
+        $file = (new File())
+        ->setName('video.mp4')
+        ->setUploadDate(new DateTime('2023-04-01'))
+        ->setPath('/home/video')
+        ->setSize(75);
         $manager->persist($file);
 
-        $file = new File();
-        $file->setName('image.png');
-        $file->setDate('03.04.2023');
-        $file->setPath('/home/images');
-        $file->setSize(15);
+        $file = (new File())
+        ->setName('image.png')
+        ->setUploadDate(new DateTime('2023-04-01'))
+        ->setPath('/home/images')
+        ->setSize(15);
         $manager->persist($file);
 
-        $file = new File();
-        $file->setName('document.docx');
-        $file->setDate('03.04.2023');
-        $file->setPath('/home/documents');
-        $file->setSize(5);
+        $file = (new File())
+        ->setName('document.docx')
+        ->setUploadDate(new DateTime('2023-04-01'))
+        ->setPath('/home/documents')
+        ->setSize(5);
         $manager->persist($file);
 
         $manager->flush();

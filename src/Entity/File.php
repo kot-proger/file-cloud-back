@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FileRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FileRepository::class)]
@@ -10,20 +11,22 @@ class File
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $path = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $size = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $date = null;
+    #[ORM\Column(type: 'date')]
+    private DateTimeInterface $uploadDate;
+
+    //    #[ORM\ManyToMany(targetEntity: User)]
 
     public function getId(): ?int
     {
@@ -47,9 +50,11 @@ class File
         return $this->path;
     }
 
-    public function setPath(?string $path): void
+    public function setPath(?string $path): self
     {
         $this->path = $path;
+
+        return $this;
     }
 
     public function getSize(): ?int
@@ -57,18 +62,22 @@ class File
         return $this->size;
     }
 
-    public function setSize(?int $size): void
+    public function setSize(?int $size): self
     {
         $this->size = $size;
+
+        return $this;
     }
 
-    public function getDate(): ?string
+    public function getUploadDate(): ?DateTimeInterface
     {
-        return $this->date;
+        return $this->uploadDate;
     }
 
-    public function setDate(?string $date): void
+    public function setUploadDate(?DateTimeInterface $uploadDate): self
     {
-        $this->date = $date;
+        $this->uploadDate = $uploadDate;
+
+        return $this;
     }
 }

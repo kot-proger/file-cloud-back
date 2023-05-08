@@ -12,16 +12,16 @@ class FileListItem
 
     private int $size;
 
-    private string $date;
+    private int $uploadDate;
 
-    public function __construct(int $id, string $name, string $path, int $size, string $date)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->path = $path;
-        $this->size = $size;
-        $this->date = $date;
-    }
+    //    public function __construct(int $id, string $name, string $path, int $size, int $uploadDate)
+    //    {
+    //        $this->id = $id;
+    //        $this->name = $name;
+    //        $this->path = $path;
+    //        $this->size = $size;
+    //        $this->uploadDate = $uploadDate;
+    //    }
 
     public function getId(): int
     {
@@ -43,8 +43,43 @@ class FileListItem
         return $this->size;
     }
 
-    public function getDate(): string
+    public function getUploadDate(): int
     {
-        return $this->date;
+        return $this->uploadDate;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function setPath(string $path): self
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    public function setSize(int $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    public function setUploadDate(int $uploadDate): self
+    {
+        $this->uploadDate = $uploadDate;
+
+        return $this;
     }
 }

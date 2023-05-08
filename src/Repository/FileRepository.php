@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\File;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,5 +38,13 @@ class FileRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @return File[]
+     */
+    public function findAllSortedByName(): array
+    {
+        return $this->findBy([], ['name' => Criteria::ASC]);
     }
 }

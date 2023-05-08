@@ -12,7 +12,7 @@ use App\Model\FileListResponse;
 
 class FileController extends AbstractController
 {
-    public function __construct(private FileService $fileService)
+    public function __construct(private readonly FileService $fileService)
     {
     }
 
@@ -24,7 +24,7 @@ class FileController extends AbstractController
      *     @Model(type=FileListResponse::class)
      * )
      */
-    #[Route(path: '/api/v1/files/getFiles', methods: ['GET'])]
+    #[Route(path: '/api/v1/files', methods: ['GET'])]
     public function files(): Response
     {
         return $this->json($this->fileService->getFiles());
