@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
+use App\Model\FileListItem;
+use App\Model\FileListResponse;
 use App\Service\FileService;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
-use App\Model\FileListResponse;
-use App\Model\FileListItem;
 
 class FileController extends AbstractController
 {
@@ -39,7 +39,7 @@ class FileController extends AbstractController
      *     @Model(type=FileListItem::class)
      * )
      */
-    #[Route(path: '/api/v1/files', methods: ['GET'])]
+    #[Route(path: '/api/v1/file', methods: ['GET'])]
     public function getfile(): Response
     {
         return $this->json($this->fileService->getFiles());
