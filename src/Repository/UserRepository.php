@@ -38,4 +38,9 @@ class UserRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function existsByEmail(string $email): bool
+    {
+        return null !== $this->findBy(['email' => $email]);
+    }
 }
