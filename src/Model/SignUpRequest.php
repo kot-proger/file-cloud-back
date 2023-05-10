@@ -11,6 +11,7 @@ class SignUpRequest
 {
     #[NotBlank]
     private string $username;
+
     #[Email]
     #[NotBlank]
     private string $email;
@@ -18,6 +19,7 @@ class SignUpRequest
     #[NotBlank]
     #[Length(min: 8)]
     private string $password;
+
     #[NotBlank]
     #[EqualTo(propertyPath: 'password', message: 'This value should be equal to password')]
     private string $confirmPassword;
