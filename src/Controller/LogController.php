@@ -40,7 +40,7 @@ class LogController extends AbstractController
      * )
      */
     #[Route(path: '/api/v1/logs', methods: ['GET'])]
-    public function userLogs(Request $request): Response
+    public function userLogs(): Response
     {
         return $this->json($this->logService->getUserLogs());
     }

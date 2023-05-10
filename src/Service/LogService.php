@@ -40,6 +40,7 @@ class LogService
     {
         return (new LogListItem())
             ->setId($log->getId())
+            ->setFile(implode([$log->getFile()->getPath(), $log->getFile()->getName()]))
             ->setUser($log->getUser()->getUsername())
             ->setDate($log->getDate()->getTimestamp())
             ->setOperation($log->getLogOperation()->getName());
