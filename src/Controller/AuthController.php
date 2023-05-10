@@ -48,6 +48,6 @@ class AuthController extends AbstractController
     {
         $username = $signUpRequest->getEmail();
 
-        return $this->json($this->signUpService->signUp($signUpRequest));
+        return $this->signUpService->signUp($signUpRequest);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Exception;
 
-use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class ValidationFailException extends \RuntimeException
@@ -11,7 +10,8 @@ class ValidationFailException extends \RuntimeException
     {
         parent::__construct('Validation failed');
     }
-    public function getViolation(): ConstraintViolationInterface
+
+    public function getViolation(): ConstraintViolationListInterface
     {
         return $this->violation;
     }
