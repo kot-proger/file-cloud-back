@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: FileRepository::class)]
@@ -28,7 +29,7 @@ class File
 
     #[ORM\JoinColumn(nullable: false)]
     #[ORM\ManyToOne(targetEntity: User::class)]
-    private User $user;
+    private UserInterface $user;
 
     #[ORM\PrePersist]
     public function setCreatedValue(): void

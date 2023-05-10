@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Attribute\RequestBody;
 use App\Model\ErrorResponse;
-use App\Model\IdResponse;
 use App\Model\SignUpRequest;
 use App\Service\SignUpService;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -24,7 +23,10 @@ class AuthController extends AbstractController
      *     response=200,
      *     description="Signs up a user",
      *
-     *     @Model(type=IdResponse::class)
+     *     @QA\JsonContent(
+     *
+     *          @QA\Property(property="token", type="string")
+     *     )
      * )
      *
      *@OA\Response(

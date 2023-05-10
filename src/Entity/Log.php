@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LogRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: LogRepository::class)]
 class Log
@@ -15,7 +16,7 @@ class Log
 
     #[ORM\JoinColumn(nullable: false)]
     #[ORM\ManyToOne(targetEntity: User::class)]
-    private User $user;
+    private UserInterface $user;
 
     #[ORM\JoinColumn(nullable: false)]
     #[Orm\ManyToOne(targetEntity: File::class)]

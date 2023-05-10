@@ -8,6 +8,7 @@ parameters:
         App\Exception\UserAlreadyExistsException: {code: 409, hidden: false }
         App\Exception\RequestBodyConvertException: {code: 400, hidden: true }
         App\Exception\ValidationFailException: {code: 500, hidden: false }
+        App\Exception\UserNotFoundException: {code: 404, hidden: false }
 
 
 services:

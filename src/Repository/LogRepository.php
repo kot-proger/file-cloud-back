@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Log;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @extends ServiceEntityRepository<Log>
@@ -37,5 +38,10 @@ class LogRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findUserLogs(UserInterface $user): array
+    {
+        return $this->findBy(['user' => $user]);
     }
 }
