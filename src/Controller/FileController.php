@@ -40,7 +40,7 @@ class FileController extends AbstractController
      * )
      */
     #[Route(path: '/api/v1/admin/files', methods: ['GET'])]
-    public function adminLogs(): Response
+    public function adminFiles(): Response
     {
         return $this->json($this->fileService->getAdminFiles());
     }
@@ -54,7 +54,7 @@ class FileController extends AbstractController
      * )
      */
     #[Route(path: '/api/v1/files', methods: ['GET'])]
-    public function userLogs(): Response
+    public function userFiles(): Response
     {
         return $this->json($this->fileService->getUserFiles());
     }

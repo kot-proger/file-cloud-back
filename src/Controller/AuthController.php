@@ -23,10 +23,7 @@ class AuthController extends AbstractController
      *     response=200,
      *     description="Signs up a user",
      *
-     *     @QA\JsonContent(
-     *
-     *          @QA\Property(property="token", type="string")
-     *     )
+
      * )
      *
      *@OA\Response(
@@ -48,8 +45,6 @@ class AuthController extends AbstractController
     #[Route(path: '/api/v1/auth/signUp', methods: ['POST'])]
     public function signUp(#[RequestBody] SignUpRequest $signUpRequest): Response
     {
-        $username = $signUpRequest->getEmail();
-
         return $this->signUpService->signUp($signUpRequest);
     }
 }

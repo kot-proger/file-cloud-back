@@ -30,7 +30,7 @@ class FileService
 
     public function getAdminFiles(): FileListResponse
     {
-        $files = $this->fileRepository->findBy([], ['date' => Criteria::ASC]);
+        $files = $this->fileRepository->findBy([], ['uploadDate' => Criteria::ASC]);
         $items = array_map(
             [$this, 'map'],
             $files
