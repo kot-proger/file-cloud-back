@@ -6,6 +6,7 @@ use App\Entity\File;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @extends ServiceEntityRepository<File>
@@ -46,5 +47,10 @@ class FileRepository extends ServiceEntityRepository
     public function findAllSortedByName(): array
     {
         return $this->findBy([], ['name' => Criteria::ASC]);
+    }
+
+    public function findUserFiles(UserInterface $user): array
+    {
+        return $this->findBy(['user' => $user]);
     }
 }

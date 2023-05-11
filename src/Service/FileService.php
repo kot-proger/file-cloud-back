@@ -6,10 +6,14 @@ use App\Entity\File;
 use App\Model\FileListItem;
 use App\Model\FileListResponse;
 use App\Repository\FileRepository;
+use Doctrine\Common\Collections\Criteria;
+use Symfony\Bundle\SecurityBundle\Security;
 
 class FileService
 {
-    public function __construct(private FileRepository $fileRepository)
+    public function __construct(
+        private FileRepository $fileRepository,
+        private Security $security)
     {
     }
 
@@ -22,6 +26,25 @@ class FileService
         );
 
         return new FileListResponse($items);
+    }
+
+    public function getAdminFiles(): FileListResponse
+    {
+        $files = $this->fileRepository->findBy([], ['date' => Criteria::ASC]);
+        $items = array_map(
+            [$this, 'map'],
+            $files
+        );
+
+        return new FileListResponse($items);
+    }
+
+    public function getUserFiles(): FileListResponse
+    {
+        return new FileListResponse(
+            array_map([$this, 'map'],
+                $this->fileRepository->findUserFiles($this->security->getUser()))
+        );
     }
 
     private function map(File $file): FileListItem
