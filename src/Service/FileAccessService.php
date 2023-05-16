@@ -22,7 +22,7 @@ class FileAccessService
     ) {
     }
 
-    public function setNewAccess(FileAccessRequest $fileAccessRequest): bool
+    public function setNewAccess(FileAccessRequest $fileAccessRequest)
     {
         if ($this->fileRepository->existsById($fileAccessRequest->getFileId())) {
             throw new FileNotFoundException();
@@ -41,9 +41,30 @@ class FileAccessService
                 ->setFile($file)
                 ->setUser($user);
 
-            $this->fileAccessRepository->save($fileAccess);
+            $this->fileAccessRepository->save($fileAccess, true);
+        } else {
+            throw new UserNotHaveAccessException();
+        }
+    }
 
-            return true;
+    public function deleteFileAccess(FileAccessRequest $fileAccessRequest)
+    {
+        if ($this->fileRepository->existsById($fileAccessRequest->getFileId())) {
+            throw new FileNotFoundException();
+        }
+
+        if ($this->userRepository->existsById($fileAccessRequest->getUserId())) {
+            throw new UserNotFoundException();
+        }
+
+        $currentUser = $this->security->getUser();
+        $file = $this->fileRepository->findOneBy([], ['id' => $fileAccessRequest->getFileId()]);
+        $user = $this->userRepository->findOneBy([], ['id' => $fileAccessRequest->getUserId()]);
+
+        if ($file->getUser() === $currentUser || in_array('ROLE_ADMIN', $currentUser->getRoles())) {
+            $fileAccess = $this->fileAccessRepository->findOneBy([], ['id' => $user->getId(), 'file' => $file->getId()]);
+
+            $this->fileAccessRepository->remove($fileAccess, true);
         } else {
             throw new UserNotHaveAccessException();
         }

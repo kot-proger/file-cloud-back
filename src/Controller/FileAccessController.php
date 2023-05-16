@@ -26,10 +26,27 @@ class FileAccessController extends AbstractController
      * @QA\RequestBody(@Model(type=FileAccessRequest::class))
      */
     #[Route(path: '/api/v1/files/setAccess')]
-    public function action(#[RequestBody] FileAccessRequest $fileAccessRequest): Response
+    public function setNewAccess(#[RequestBody] FileAccessRequest $fileAccessRequest): Response
     {
 
         $this->fileAccessService->setNewAccess($fileAccessRequest);
+
+        return $this->json(['done']);
+    }
+
+    /**
+     * @OA\Response(
+     *     response=200,
+     *     description="Add access fo file",
+     * )
+     *
+     * @QA\RequestBody(@Model(type=FileAccessRequest::class))
+     */
+    #[Route(path: '/api/v1/files/setAccess')]
+    public function removeAccess(#[RequestBody] FileAccessRequest $fileAccessRequest): Response
+    {
+
+        $this->fileAccessService->deleteFileAccess($fileAccessRequest);
 
         return $this->json(['done']);
     }
