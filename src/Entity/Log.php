@@ -22,9 +22,8 @@ class Log
     #[Orm\ManyToOne(targetEntity: File::class)]
     private File $file;
 
-    #[ORM\JoinColumn(nullable: false)]
-    #[ORM\ManyToOne(targetEntity: LogOperation::class)]
-    private LogOperation $logOperation;
+    #[ORM\Column(type: 'string')]
+    private string $logOperation;
 
     #[ORM\Column(type: 'date_immutable')]
     private \DateTimeInterface $date;
@@ -63,12 +62,12 @@ class Log
         return $this;
     }
 
-    public function getLogOperation(): LogOperation
+    public function getLogOperation(): string
     {
         return $this->logOperation;
     }
 
-    public function setLogOperation(LogOperation $logOperation): self
+    public function setLogOperation(string $logOperation): self
     {
         $this->logOperation = $logOperation;
 

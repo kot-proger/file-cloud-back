@@ -22,8 +22,6 @@ class AuthController extends AbstractController
      * @OA\Response(
      *     response=200,
      *     description="Signs up a user",
-     *
-
      * )
      *
      *@OA\Response(

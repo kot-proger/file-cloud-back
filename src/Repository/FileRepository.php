@@ -53,4 +53,9 @@ class FileRepository extends ServiceEntityRepository
     {
         return $this->findBy(['user' => $user]);
     }
+
+    public function existsById(int $id): bool
+    {
+        return null !== $this->findOneBy(['id' => $id]);
+    }
 }
