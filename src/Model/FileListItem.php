@@ -16,6 +16,8 @@ class FileListItem
 
     private string $username;
 
+    private string $access;
+
     //    public function __construct(int $id, string $name, string $path, int $size, int $uploadDate)
     //    {
     //        $this->id = $id;
@@ -93,6 +95,18 @@ class FileListItem
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getAccess(): string
+    {
+        return $this->access;
+    }
+
+    public function setAccess(string $access): self
+    {
+        $this->access = $access;
 
         return $this;
     }

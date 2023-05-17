@@ -55,7 +55,8 @@ class FileService
         ->setPath($file->getPath())
         ->setSize($file->getSize())
         ->setUsername($file->getUser()->getUsername())
-        ->setUploadDate($file->getUploadDate()->getTimestamp());
+        ->setUploadDate($file->getUploadDate()->getTimestamp())
+        ->setAccess($file->getAccess());
     }
 
     private function getFile(int $id): FileListItem
@@ -67,6 +68,7 @@ class FileService
             ->setPath($file->getPath())
             ->setSize($file->getSize())
             ->setUsername($file->getUser()->getUsername())
-            ->setUploadDate($file->getUploadDate()->getTimestamp());
+            ->setUploadDate($file->getUploadDate()->getTimestamp())
+            ->setAccess($file->getAccess());
     }
 }

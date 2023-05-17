@@ -31,6 +31,9 @@ class File
     #[ORM\ManyToOne(targetEntity: User::class)]
     private UserInterface $user;
 
+    #[ORM\Column(type: 'string')]
+    private string $access;
+
     #[ORM\PrePersist]
     public function setCreatedValue(): void
     {
@@ -99,6 +102,18 @@ class File
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAccess(): string
+    {
+        return $this->access;
+    }
+
+    public function setAccess(string $access = 'USER'): self
+    {
+        $this->access = $access;
 
         return $this;
     }
