@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\NotificationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 class Notification
 {
@@ -24,12 +24,19 @@ class Notification
     #[ORM\Column(type: 'date_immutable')]
     private \DateTimeInterface $date;
 
+    #[ORM\PrePersist]
+    public function setCreatedValue(): void
+    {
+        $this->date = new \DateTimeImmutable();
+
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUser(): UserInterface
+    public function getUser(): User
     {
         return $this->user;
     }
