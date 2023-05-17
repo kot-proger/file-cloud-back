@@ -45,4 +45,6 @@ class AuthController extends AbstractController
     {
         return $this->signUpService->signUp($signUpRequest);
     }
+
+
 }

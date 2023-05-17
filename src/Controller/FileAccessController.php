@@ -23,7 +23,7 @@ class FileAccessController extends AbstractController
      *     description="Add access fo file",
      * )
      *
-     * @QA\RequestBody(@Model(type=FileAccessRequest::class))
+     * @OA\RequestBody(@Model(type=FileAccessRequest::class))
      */
     #[Route(path: '/api/v1/files/setAccess')]
     public function setNewAccess(#[RequestBody] FileAccessRequest $fileAccessRequest): Response
@@ -37,10 +37,10 @@ class FileAccessController extends AbstractController
     /**
      * @OA\Response(
      *     response=200,
-     *     description="Add access fo file",
+     *     description="Remove access fo file",
      * )
      *
-     * @QA\RequestBody(@Model(type=FileAccessRequest::class))
+     * @OA\RequestBody(@Model(type=FileAccessRequest::class))
      */
     #[Route(path: '/api/v1/files/setAccess')]
     public function removeAccess(#[RequestBody] FileAccessRequest $fileAccessRequest): Response
