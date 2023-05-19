@@ -2,9 +2,11 @@
 
 namespace App\Service;
 
+use App\Entity\Settings;
 use App\Entity\User;
 use App\Exception\UserAlreadyExistsException;
 use App\Model\SignUpRequest;
+use App\Repository\SettingsRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Http\Authentication\AuthenticationSuccessHandler;
@@ -19,7 +21,8 @@ class SignUpService
         private UserPasswordHasherInterface $userPasswordHasher,
         private EntityManagerInterface $em,
         private AuthenticationSuccessHandler $authenticationSuccessHandler,
-        private Filesystem $filesystem)
+        private Filesystem $filesystem,
+        private SettingsRepository $settingsRepository)
     {
     }
 
@@ -39,8 +42,8 @@ class SignUpService
         $this->em->persist($user);
         $this->em->flush();
 
-//        $dir = $this->getParameter('kernel.project_dir').'/public/';
-//        $this->filesystem->mkdir();
+        $settings = (new Settings())->setUser($user);
+        $this->settingsRepository->save($settings, true);
 
         return $this->authenticationSuccessHandler->handleAuthenticationSuccess($user);
     }
