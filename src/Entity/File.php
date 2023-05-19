@@ -24,7 +24,7 @@ class File
     #[ORM\Column(type: 'decimal')]
     private ?float $size = null;
 
-    #[ORM\Column(type: 'date_immutable')]
+    #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeInterface $uploadDate;
 
     #[ORM\JoinColumn(nullable: false)]

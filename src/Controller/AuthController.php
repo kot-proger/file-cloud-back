@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Attribute\RequestBody;
 use App\Model\ErrorResponse;
 use App\Model\SignUpRequest;
+use App\Service\DirectoryService;
 use App\Service\SignUpService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
@@ -43,8 +44,12 @@ class AuthController extends AbstractController
     #[Route(path: '/api/v1/auth/signUp', methods: ['POST'])]
     public function signUp(#[RequestBody] SignUpRequest $signUpRequest): Response
     {
-        return $this->signUpService->signUp($signUpRequest);
+        return $this->signUpService->signUp($signUpRequest, $this->getParameter('kernel.project_dir').'/public/files');
     }
 
-
+    #[Route(path: '/api/v1/auth/logOut')]
+    public function logOut(): Response
+    {
+        return $this->json(['text' => 'done']);
+    }
 }

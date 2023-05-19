@@ -25,7 +25,7 @@ class Log
     #[ORM\Column(type: 'string')]
     private string $logOperation;
 
-    #[ORM\Column(type: 'date_immutable')]
+    #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeInterface $date;
 
     #[ORM\PrePersist]
