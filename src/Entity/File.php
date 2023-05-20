@@ -31,6 +31,10 @@ class File
     #[ORM\ManyToOne(targetEntity: User::class)]
     private UserInterface $user;
 
+    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Directory::class)]
+    private Directory $directory;
+
     #[ORM\Column(type: 'string')]
     private string $access;
 
@@ -114,6 +118,18 @@ class File
     public function setAccess(string $access = 'USER'): self
     {
         $this->access = $access;
+
+        return $this;
+    }
+
+    public function getDirectory(): Directory
+    {
+        return $this->directory;
+    }
+
+    public function setDirectory(Directory $directory): self
+    {
+        $this->directory = $directory;
 
         return $this;
     }
