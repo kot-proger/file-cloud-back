@@ -8,8 +8,6 @@ class FileListItem
 
     private string $name;
 
-    private string $path;
-
     private float $size;
 
     private int $uploadDate;
@@ -17,6 +15,8 @@ class FileListItem
     private string $username;
 
     private string $access;
+
+    private string $dirName;
 
     //    public function __construct(int $id, string $name, string $path, int $size, int $uploadDate)
     //    {
@@ -35,11 +35,6 @@ class FileListItem
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getPath(): string
-    {
-        return $this->path;
     }
 
     public function getSize(): float
@@ -62,13 +57,6 @@ class FileListItem
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function setPath(string $path): self
-    {
-        $this->path = $path;
 
         return $this;
     }
@@ -107,6 +95,18 @@ class FileListItem
     public function setAccess(string $access): self
     {
         $this->access = $access;
+
+        return $this;
+    }
+
+    public function getDirName(): string
+    {
+        return $this->dirName;
+    }
+
+    public function setDirName(string $dirName): self
+    {
+        $this->dirName = $dirName;
 
         return $this;
     }

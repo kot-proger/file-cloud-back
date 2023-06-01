@@ -6,6 +6,8 @@ use App\Entity\FileAccess;
 use App\Exception\FileNotFoundException;
 use App\Exception\UserNotFoundException;
 use App\Exception\UserNotHaveAccessException;
+use App\Model\FileAccessListItem;
+use App\Model\FileAccessListResponse;
 use App\Model\FileAccessRequest;
 use App\Repository\FileAccessRepository;
 use App\Repository\FileRepository;
@@ -68,5 +70,23 @@ class FileAccessService
         } else {
             throw new UserNotHaveAccessException();
         }
+    }
+
+    public function getAccesses(int $fileId): FileAccessListResponse
+    {
+        $file = $this->fileRepository->find($fileId);
+
+        $items = array_map([$this, 'map'],
+            $this->fileAccessRepository->findBy(['file' => $file])
+        );
+
+        return new FileAccessListResponse($items);
+    }
+
+    private function map(FileAccess $fileAccess): FileAccessListItem
+    {
+        return (new FileAccessListItem())
+            ->setId($fileAccess->getId())
+            ->setUsername($fileAccess->getUser()->getUsername());
     }
 }

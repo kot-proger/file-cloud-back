@@ -16,7 +16,7 @@ class Directory
 
     #[ORM\JoinColumn(nullable: true)]
     #[ORM\ManyToOne(targetEntity: User::class)]
-    private UserInterface $user;
+    private ?UserInterface $user = null;
 
     #[ORM\ManyToOne(targetEntity: self::class)]
     #[ORM\JoinColumn(nullable: true)]
@@ -25,10 +25,18 @@ class Directory
     #[ORM\Column(type: 'string')]
     private ?string $name = null;
 
-    public function __construct()
+    public function getPath(): ?string
     {
-    }
+        $directory = $this->parentDir;
+        $path = '/'.$directory->getName();
 
+        while (null !== $directory) {
+            $directory = $directory->getParentDir();
+            $path = '/'.$directory->getName().$path;
+        }
+
+        return $path;
+    }
     public function getId(): ?int
     {
         return $this->id;

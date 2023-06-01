@@ -18,9 +18,6 @@ class File
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private ?string $path = null;
-
     #[ORM\Column(type: 'decimal')]
     private ?float $size = null;
 
@@ -42,7 +39,6 @@ class File
     public function setCreatedValue(): void
     {
         $this->uploadDate = new \DateTimeImmutable();
-
     }
 
     public function getId(): ?int
@@ -64,14 +60,15 @@ class File
 
     public function getPath(): ?string
     {
-        return $this->path;
-    }
+        $directory = $this->directory;
+        $path = '/'.$directory->getName();
 
-    public function setPath(?string $path): self
-    {
-        $this->path = $path;
+        while (null !== $directory) {
+            $directory = $directory->getParentDir();
+            $path = '/'.$directory->getName().$path;
+        }
 
-        return $this;
+        return $path;
     }
 
     public function getSize(): ?float

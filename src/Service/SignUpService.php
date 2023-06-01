@@ -12,7 +12,6 @@ use App\Repository\SettingsRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Http\Authentication\AuthenticationSuccessHandler;
-use phpDocumentor\Reflection\PseudoTypes\IntegerValue;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -51,17 +50,16 @@ class SignUpService
         $this->settingsRepository->save($settings, true);
 
         $this->directoryService->createUserDirectory($user, $baseDirectoryPath);
-        $response = $this->authenticationSuccessHandler->handleAuthenticationSuccess($user);
 
-        $token = json_decode($response->getContent());
-        $this->accessTokenRepository->save(
-            (new AccessToken())
-                ->setToken($token->{'token'})
-                ->setUser($user),
-            true
-        );
+        //        $token = json_decode($response->getContent());
+        //        $this->accessTokenRepository->save(
+        //            (new AccessToken())
+        //                ->setToken($token->{'token'})
+        //                ->setUser($user),
+        //            true
+        //        );
 
-        return $response;
+        return $this->authenticationSuccessHandler->handleAuthenticationSuccess($user);
     }
 
     public function logOut(): void

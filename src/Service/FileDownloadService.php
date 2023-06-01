@@ -6,7 +6,6 @@ use App\Model\FileDownloadRequest;
 use App\Model\FileDownloadResponse;
 use App\Repository\FileRepository;
 use App\Repository\UserRepository;
-use http\Env\Response;
 use Symfony\Bundle\SecurityBundle\Security;
 
 class FileDownloadService
@@ -30,8 +29,8 @@ class FileDownloadService
         }
 
         if (in_array('ROLE_USER', $user->getRoles())) {
-            if ($user === $this->userRepository->getUser($file->getUser())) {
-                $response->setLink(implode(['/public/files', $file->getPath(), $file->getPath()]));
+            if ($user === $this->userRepository->getUser($file->getUser()->getId())) {
+                $response->setLink(implode(['/files', $file->getPath(), $file->getPath()]));
             }
         }
 
