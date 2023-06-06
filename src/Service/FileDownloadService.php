@@ -25,12 +25,12 @@ class FileDownloadService
         $response->setLink('file not found');
 
         if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            $response->setLink(implode(['/public/files', $file->getPath(), $file->getPath()]));
+            $response->setLink(implode(['/public/files11', $file->getPath(), $file->getPath()]));
         }
 
         if (in_array('ROLE_USER', $user->getRoles())) {
             if ($user === $this->userRepository->getUser($file->getUser()->getId())) {
-                $response->setLink(implode(['/files', $file->getPath(), $file->getPath()]));
+                $response->setLink(implode(['/files11', $file->getPath(), $file->getPath()]));
             }
         }
 

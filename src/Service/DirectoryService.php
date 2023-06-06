@@ -25,11 +25,11 @@ class DirectoryService
 
     public function createBaseDir(string $path)
     {
-        $this->filesystem->mkdir($path.'/files');
+        $this->filesystem->mkdir($path.'/public/files');
 
         $this->directoryRepository->save(
             (new Directory())
-                ->setName('files')
+                ->setName('files11')
                 ->setParentDir(null)
                 ->setUser(null),
             true

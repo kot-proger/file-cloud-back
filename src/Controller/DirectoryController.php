@@ -29,7 +29,7 @@ class DirectoryController extends AbstractController
     #[Route(path: '/api/v1/directories/create', methods: ['POST'])]
     public function CreateDir(#[RequestBody] CreateDirectoryRequest $createDirectoryRequest): DirContentListResponse
     {
-        $this->directoryService->createDirectory($this->getParameter('kernel.project_dir').'/public/files', $createDirectoryRequest);
+        $this->directoryService->createDirectory($this->getParameter('kernel.project_dir').'/public/files11', $createDirectoryRequest);
 
         return $this->directoryService->getDirContent($createDirectoryRequest->getParentDirId());
     }

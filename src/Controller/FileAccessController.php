@@ -25,7 +25,7 @@ class FileAccessController extends AbstractController
      *
      * @OA\RequestBody(@Model(type=FileAccessRequest::class))
      */
-    #[Route(path: '/api/v1/files/setAccess', methods: ['POST'])]
+    #[Route(path: '/api/v1/files11/setAccess', methods: ['POST'])]
     public function setNewAccess(#[RequestBody] FileAccessRequest $fileAccessRequest): Response
     {
 
@@ -42,7 +42,7 @@ class FileAccessController extends AbstractController
      *
      * @OA\RequestBody(@Model(type=FileAccessRequest::class))
      */
-    #[Route(path: '/api/v1/files/removeAccess', methods: ['DELETE'])]
+    #[Route(path: '/api/v1/files11/removeAccess', methods: ['DELETE'])]
     public function removeAccess(#[RequestBody] FileAccessRequest $fileAccessRequest): Response
     {
 
