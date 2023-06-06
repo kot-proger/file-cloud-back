@@ -84,9 +84,8 @@ class FileController extends AbstractController
      *     description="Changes access level to file",
      *
      *     @Model(type=FileListResponse::class)
-     *
-     * @OA\RequestBody(@Model(type=ChangeFileAccessRequest::class))
      * )
+     * @OA\RequestBody(@Model(type=ChangeFileAccessRequest::class))
      */
     #[Route(path: '/api/v1/files/changeAccess', methods: ['POST'])]
     public function changeAccess(#[RequestBody] ChangeFileAccessRequest $request): FileListResponse
@@ -98,9 +97,8 @@ class FileController extends AbstractController
      * @OA\Response(
      *     response=200,
      *     description="Creates new access to file",
-     *
-     * @OA\RequestBody(@Model(type=FileAccessRequest::class))
      * )
+     * @OA\RequestBody(@Model(type=FileAccessRequest::class))
      */
     #[Route(path: '/api/v1/files/createAccess', methods: ['POST'])]
     public function createAccess(#[RequestBody] FileAccessRequest $request): Response

@@ -2,10 +2,14 @@
 
 namespace App\Model;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 class FileAccessRequest
 {
+    #[NotBlank]
     private int $userId;
 
+    #[NotBlank]
     private int $fileId;
 
     public function getUserId(): int

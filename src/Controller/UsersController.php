@@ -24,7 +24,7 @@ class UsersController extends AbstractController
      *     @Model(type=UsersListResponse::class)
      * )
      */
-    #[Route(path: '/api/v1/users')]
+    #[Route(path: '/api/v1/users', methods: ['GET'])]
     public function getUsers(): UsersListResponse
     {
         return $this->usersService->getUsers();

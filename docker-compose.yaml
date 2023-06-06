@@ -1,0 +1,69 @@
+version: "3.9"
+
+services:
+  file-cloud-backend:
+    container_name: app
+    env_file:
+      - .env
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - '8080:80'
+    networks:
+      - cloud
+    depends_on:
+      - file-cloud-migration
+    volumes:
+      - './public/files:/app/public/files'
+
+  file-cloud-migration:
+    container_name: app-migration
+    env_file:
+      - .env
+    build:
+      dockerfile: Dockerfile
+      context: .
+    networks:
+      - cloud
+    depends_on:
+      database:
+        condition: service_healthy
+    command:
+      - bin/console doctrine:database:create
+      - bin/console doctrine:migrations:migrate --no-interaction
+    working_dir: /app
+    entrypoint: php
+
+  database:
+    container_name: postgres
+    image: postgres:13.3-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test:
+        - CMD
+        - pg_isready
+        - '-q'
+        - '-d'
+        - 'app'
+        - '-U'
+        - 'postgres'
+      retries: 3
+      timeout: 5s
+    networks:
+      - cloud
+    volumes:
+      - 'cloud-pgsql:/var/lib/postgresql/data'
+
+networks:
+  cloud:
+    driver: bridge
+
+volumes:
+  cloud-pgsql:
+    driver: local

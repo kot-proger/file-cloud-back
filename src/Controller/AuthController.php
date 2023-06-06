@@ -20,7 +20,7 @@ class AuthController extends AbstractController
     }
 
     /**
-     * @OA\Response(
+     *@OA\Response(
      *     response=200,
      *     description="Signs up a user",
      * )
@@ -47,7 +47,7 @@ class AuthController extends AbstractController
         return $this->signUpService->signUp($signUpRequest, $this->getParameter('kernel.project_dir').'/public/files');
     }
 
-    #[Route(path: '/api/v1/auth/logOut')]
+    #[Route(path: '/api/v1/auth/logOut', methods: ['POST'])]
     public function logOut(): Response
     {
         return $this->json(['text' => 'done']);

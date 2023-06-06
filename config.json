@@ -1,0 +1,32 @@
+{
+  "listeners": {
+    "*:80": {
+      "pass": "routes"
+    }
+  },
+  "routes": [
+    {
+      "match": {
+        "uri": "!/index.php"
+      },
+      "action": {
+        "share": "/app/public$uri",
+        "fallback": {
+          "pass": "applications/symfony"
+        }
+      }
+    }
+  ],
+  "applications": {
+    "symfony": {
+      "type": "php",
+      "root": "/app/public",
+      "script": "index.php",
+      "user": "backend",
+      "group": "backend",
+      "options": {
+        "file": "/etc/php.ini"
+      }
+    }
+  }
+}

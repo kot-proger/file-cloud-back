@@ -7,10 +7,9 @@ use App\Model\CreateDirectoryRequest;
 use App\Model\DirContentListResponse;
 use App\Service\DirectoryService;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Annotations as OA;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DirectoryController extends AbstractController
 {
@@ -24,16 +23,15 @@ class DirectoryController extends AbstractController
      *     description="Create directory and return updated directory content",
      *
      *     @Model(type=DirContentListResponse::class)
-     *
-     * @OA\RequestBody(@Model(type=CreateDirectoryRequest::class))
      * )
+     * @OA\RequestBody(@Model(type=CreateDirectoryRequest::class))
      */
     #[Route(path: '/api/v1/directories/create', methods: ['POST'])]
-    public function Create(#[RequestBody] CreateDirectoryRequest $request): DirContentListResponse
+    public function CreateDir(#[RequestBody] CreateDirectoryRequest $createDirectoryRequest): DirContentListResponse
     {
-        $this->directoryService->createDirectory($this->getParameter('kernel.project_dir').'/public/files', $request);
+        $this->directoryService->createDirectory($this->getParameter('kernel.project_dir').'/public/files', $createDirectoryRequest);
 
-        return $this->directoryService->getDirContent($request->getParentDirId());
+        return $this->directoryService->getDirContent($createDirectoryRequest->getParentDirId());
     }
 
     /**
@@ -45,7 +43,7 @@ class DirectoryController extends AbstractController
      * )
      */
     #[Route(path: '/api/v1/directories/{dirId}/getContent', methods: ['GET'])]
-    public function getContent(int $dirId): DirContentListResponse
+    public function getContentFromDir(int $dirId): DirContentListResponse
     {
         return $this->directoryService->getDirContent($dirId);
     }
