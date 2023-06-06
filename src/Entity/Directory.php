@@ -59,7 +59,7 @@ class Directory
         return $this->user;
     }
 
-    public function setUser(UserInterface $user): self
+    public function setUser(?UserInterface $user): self
     {
         $this->user = $user;
 

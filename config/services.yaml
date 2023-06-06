@@ -35,3 +35,7 @@ services:
     App\Listener\APIExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, priority: 10 }
+
+    App\Command\MakeBaseDirectoryCommand:
+        arguments:
+            $path: '%kernel.project_dir%'

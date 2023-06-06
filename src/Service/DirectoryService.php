@@ -23,6 +23,19 @@ class DirectoryService
     {
     }
 
+    public function createBaseDir(string $path)
+    {
+        $this->filesystem->mkdir($path.'/files');
+
+        $this->directoryRepository->save(
+            (new Directory())
+                ->setName('files')
+                ->setParentDir(null)
+                ->setUser(null),
+            true
+        );
+    }
+
     public function createUserDirectory(User $user, string $baseDirectoryPath)
     {
         $this->filesystem->mkdir($baseDirectoryPath.'/'.$user->getEmail());
