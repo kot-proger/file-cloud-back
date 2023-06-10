@@ -27,7 +27,7 @@ class FileDownloadController extends AbstractController
      *
      * @OA\RequestBody(@Model(type=FileDownloadRequest::class))
      */
-    #[Route(path: '/api/v1/files11/download', methods: ['GET'])]
+    #[Route(path: '/api/v1/files/download', methods: ['GET'])]
     public function action(#[RequestBody] FileDownloadRequest $fileDownloadRequest): JsonResponse
     {
         return $this->json($this->downloadService->getFileLink($fileDownloadRequest));

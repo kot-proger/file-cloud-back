@@ -39,12 +39,12 @@ class FileController extends AbstractController
     /**
      * @OA\Response(
      *     response=200,
-     *     description="Returns files11",
+     *     description="Returns files",
      *
      *     @Model(type=FileListResponse::class)
      * )
      */
-    #[Route(path: '/api/v1/admin/files11', methods: ['GET'])]
+    #[Route(path: '/api/v1/admin/files', methods: ['GET'])]
     public function adminFiles(): Response
     {
         return $this->json($this->fileService->getAdminFiles());
@@ -53,12 +53,12 @@ class FileController extends AbstractController
     /**
      * @OA\Response(
      *     response=200,
-     *     description="Returns files11",
+     *     description="Returns files",
      *
      *     @Model(type=FileListResponse::class)
      * )
      */
-    #[Route(path: '/api/v1/files11', methods: ['GET'])]
+    #[Route(path: '/api/v1/files', methods: ['GET'])]
     public function userFiles(): Response
     {
         return $this->json($this->fileService->getUserFiles());
@@ -67,12 +67,12 @@ class FileController extends AbstractController
     /**
      * @OA\Response(
      *     response=200,
-     *     description="Returns available files11",
+     *     description="Returns available files",
      *
      *     @Model(type=FileListResponse::class)
      * )
      */
-    #[Route(path: '/api/v1/files11/available', methods: ['GET'])]
+    #[Route(path: '/api/v1/files/available', methods: ['GET'])]
     public function availableFiles(): FileListResponse
     {
         return $this->fileService->getAvailableFiles();
@@ -87,7 +87,7 @@ class FileController extends AbstractController
      * )
      * @OA\RequestBody(@Model(type=ChangeFileAccessRequest::class))
      */
-    #[Route(path: '/api/v1/files11/changeAccess', methods: ['POST'])]
+    #[Route(path: '/api/v1/files/changeAccess', methods: ['POST'])]
     public function changeAccess(#[RequestBody] ChangeFileAccessRequest $request): FileListResponse
     {
         return $this->fileService->changeAccess($request);
@@ -100,7 +100,7 @@ class FileController extends AbstractController
      * )
      * @OA\RequestBody(@Model(type=FileAccessRequest::class))
      */
-    #[Route(path: '/api/v1/files11/createAccess', methods: ['POST'])]
+    #[Route(path: '/api/v1/files/createAccess', methods: ['POST'])]
     public function createAccess(#[RequestBody] FileAccessRequest $request): Response
     {
         $this->fileAccessService->setNewAccess($request);
@@ -116,7 +116,7 @@ class FileController extends AbstractController
      *     @Model(type=FileAccessListResponse::class)
      * )
      */
-    #[Route(path: '/api/v1/files11/{fileId}/accesses', methods: ['GET'])]
+    #[Route(path: '/api/v1/files/{fileId}/accesses', methods: ['GET'])]
     public function getAccess(int $fileId): FileAccessListResponse
     {
         return $this->fileAccessService->getAccesses($fileId);
@@ -129,7 +129,7 @@ class FileController extends AbstractController
      *
      * )
      */
-    #[Route(path: '/api/v1/files11/deleteAccess', methods: ['DELETE'])]
+    #[Route(path: '/api/v1/files/deleteAccess', methods: ['DELETE'])]
     public function deleteAccess(#[RequestBody] FileAccessRequest $request): Response
     {
         $this->fileAccessService->deleteFileAccess($request);

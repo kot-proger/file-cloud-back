@@ -15,7 +15,7 @@ services:
     depends_on:
       - file-cloud-migration
     volumes:
-      - './public/files11:/app/public/files11'
+      - './public/files:/app/public/files'
 
   file-cloud-migration:
     container_name: app-migration

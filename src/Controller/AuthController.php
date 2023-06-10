@@ -44,7 +44,7 @@ class AuthController extends AbstractController
     #[Route(path: '/api/v1/auth/signUp', methods: ['POST'])]
     public function signUp(#[RequestBody] SignUpRequest $signUpRequest): Response
     {
-        return $this->signUpService->signUp($signUpRequest, $this->getParameter('kernel.project_dir').'/public/files11');
+        return $this->signUpService->signUp($signUpRequest, $this->getParameter('kernel.project_dir').'/public/files');
     }
 
     #[Route(path: '/api/v1/auth/logOut', methods: ['POST'])]

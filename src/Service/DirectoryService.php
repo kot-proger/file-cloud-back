@@ -29,7 +29,7 @@ class DirectoryService
 
         $this->directoryRepository->save(
             (new Directory())
-                ->setName('files11')
+                ->setName('files')
                 ->setParentDir(null)
                 ->setUser(null),
             true
