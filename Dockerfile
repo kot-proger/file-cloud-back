@@ -39,11 +39,16 @@ COPY --from=base /app/config.json /docker-entrypoint.d/config.json
 COPY --from=base /app/php.ini /etc/php.ini
 
 RUN apt-get update && \
-    apt-get install -y libpq-dev && \
-    docker-php-ext-install pgsql pdo_pgsql opcache && \
+    apt-get install -y libpq-dev curl git unzip libzip-dev && \
+    docker-php-ext-install pgsql pdo_pgsql opcache zip && \
     apt-get --purge -y remove gcc make && \
     apt-get -y autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php \
+    && php -r "unlink('composer-setup.php');" \
+    && mv composer.phar /usr/local/bin/composer
 
 EXPOSE 80
