@@ -12,6 +12,7 @@ use App\Repository\SettingsRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Http\Authentication\AuthenticationSuccessHandler;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -26,7 +27,8 @@ class SignUpService
         private SettingsRepository $settingsRepository,
         private DirectoryService $directoryService,
         private AccessTokenRepository $accessTokenRepository,
-        private Security $security)
+        private Security $security,
+        private LoggerInterface $logger)
     {
     }
 
@@ -45,6 +47,8 @@ class SignUpService
 
         $this->em->persist($user);
         $this->em->flush();
+
+        $this->logger->info($user->getUserIdentifier());
 
         $settings = (new Settings())->setUser($user);
         $this->settingsRepository->save($settings, true);

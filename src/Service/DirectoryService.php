@@ -44,7 +44,8 @@ class DirectoryService
         $this->directoryRepository->save(
             (new Directory())
                 ->setName($user->getEmail())
-                ->setParentDir($this->directoryRepository->findOneBy(['parentDir' => null])),
+                ->setParentDir($this->directoryRepository->findOneBy(['parentDir' => null]))
+                ->setUser($user),
             true
         );
     }
