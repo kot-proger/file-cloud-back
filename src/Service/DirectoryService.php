@@ -10,6 +10,7 @@ use App\Model\DirContentListItem;
 use App\Model\DirContentListResponse;
 use App\Repository\DirectoryRepository;
 use App\Repository\FileRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Filesystem\Filesystem;
 

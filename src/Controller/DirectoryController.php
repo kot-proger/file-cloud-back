@@ -11,6 +11,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DirectoryController extends AbstractController
@@ -18,9 +19,8 @@ class DirectoryController extends AbstractController
     public function __construct(
         private DirectoryService $directoryService,
         private Security $security,
-        private DirectoryRepository $directoryRepository
-    )
-    {
+        private DirectoryRepository $directoryRepository,
+    ) {
     }
 
     /**
@@ -30,6 +30,7 @@ class DirectoryController extends AbstractController
      *
      *     @Model(type=DirContentListResponse::class)
      * )
+     *
      * @OA\RequestBody(@Model(type=CreateDirectoryRequest::class))
      */
     #[Route(path: '/api/v1/directories/create', methods: ['POST'])]
@@ -49,9 +50,9 @@ class DirectoryController extends AbstractController
      * )
      */
     #[Route(path: '/api/v1/directories/{dirId}/getContent', methods: ['GET'])]
-    public function getContentFromDir(int $dirId): DirContentListResponse
+    public function getContentFromDir(int $dirId): Response
     {
-        return $this->directoryService->getDirContent($dirId);
+        return $this->json($this->directoryService->getDirContent($dirId));
     }
 
     /**
@@ -63,10 +64,11 @@ class DirectoryController extends AbstractController
      * )
      */
     #[Route(path: '/api/v1/directories/getUsersDir', methods: ['GET'])]
-    public function getUsersDir(): DirContentListResponse
+    public function getUsersDir(): Response
     {
         $user = $this->security->getUser();
-        $dir = $this->directoryRepository->findOneBy(['name' => $user->getUserIdentifier(), 'user' => $user]);
-        return $this->directoryService->getDirContent($dir->getId());
+        $dir = $this->directoryRepository->findOneBy(['name' => $user->getUserIdentifier()]);
+
+        return $this->json($this->directoryService->getDirContent($dir->getId()));
     }
 }
